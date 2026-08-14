@@ -1,26 +1,698 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --night-feather: #182b28;
+  --banyan: #244f3d;
+  --fern: #557a52;
+  --chestnut: #9b6747;
+  --eye-gold: #e1ae42;
+  --morning-mist: #dcebd7;
+  --paper: #edf3e8;
+  --white: #f8fbf4;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--night-feather);
+  color: var(--night-feather);
+  font-family: var(--font-body), "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.hero-shell {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--night-feather);
+}
+
+.hero-sequence,
+.hero-background,
+.hero-light,
+.opening-shade {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-background {
+  z-index: -5;
+  overflow: hidden;
+  background: var(--banyan);
+  animation: background-arrive 2.4s cubic-bezier(0.22, 0.76, 0.24, 1) both;
+}
+
+.hero-background img {
+  object-fit: cover;
+  object-position: center 52%;
+  transform: scale(1.035);
+}
+
+.hero-light {
+  z-index: -4;
+  background:
+    radial-gradient(circle at 51% 42%, rgb(245 239 174 / 32%) 0 8%, transparent 36%),
+    linear-gradient(180deg, rgb(24 43 40 / 5%) 30%, rgb(24 43 40 / 24%) 100%);
+  mix-blend-mode: soft-light;
+  animation: light-arrive 2.7s 0.65s ease-out both;
+}
+
+.hero-mist {
+  position: absolute;
+  z-index: -3;
+  width: 54vw;
+  height: 18vw;
+  min-height: 120px;
+  border-radius: 50%;
+  background: rgb(220 235 215 / 26%);
+  filter: blur(40px);
+  pointer-events: none;
+  animation: mist-clear 4.2s cubic-bezier(0.2, 0.76, 0.3, 1) both;
+}
+
+.hero-mist-one {
+  top: 26%;
+  left: 15%;
+  transform: rotate(-8deg);
+}
+
+.hero-mist-two {
+  right: -5%;
+  bottom: 10%;
+  opacity: 0.45;
+  transform: rotate(12deg);
+  animation-delay: 0.25s;
+}
+
+.site-header {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(20px, 3vw, 40px) clamp(20px, 4.5vw, 72px);
+  opacity: 0;
+  animation: copy-arrive 0.8s 2.3s ease-out forwards;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 52px;
+  height: 34px;
+  place-items: center;
+  overflow: hidden;
+}
+
+.brand-mark img {
+  width: 58px;
+  height: auto;
+}
+
+.brand-name {
+  display: grid;
+  line-height: 1.05;
+}
+
+.brand-name span:first-child {
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.brand-name span:last-child {
+  margin-top: 4px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  border: 1px solid rgb(24 43 40 / 23%);
+  border-radius: 999px;
+  background: rgb(237 243 232 / 78%);
+  box-shadow: 0 8px 32px rgb(24 43 40 / 8%);
+  padding: 9px 14px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.bird-stage {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 58%;
+  width: min(52vw, 780px);
+  aspect-ratio: 1494 / 1053;
+  transform: translate(-50%, -43%);
+  opacity: 0;
+  animation: bird-arrive 1s 1.48s cubic-bezier(0.18, 0.78, 0.25, 1) forwards;
+}
+
+.bird-idle {
+  position: absolute;
+  inset: 0;
+  transform-origin: 82% 42%;
+  animation: bird-notices-you 7s 3.2s ease-in-out infinite;
+}
+
+.bird-idle img {
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 18px rgb(24 43 40 / 22%));
+}
+
+.bird-shadow {
+  position: absolute;
+  z-index: 1;
+  right: 13%;
+  bottom: 5%;
+  width: 48%;
+  height: 8%;
+  border-radius: 50%;
+  background: rgb(24 43 40 / 29%);
+  filter: blur(13px);
+  transform: rotate(-3deg);
+}
+
+.hero-copy {
+  position: absolute;
+  z-index: 7;
+  left: clamp(22px, 6vw, 96px);
+  bottom: clamp(76px, 9.5vh, 116px);
+  width: min(41vw, 590px);
+  opacity: 0;
+  animation: copy-arrive 0.9s 2.45s ease-out forwards;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: clamp(11px, 0.86vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.hero-kicker::before {
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-family: var(--font-display), "BiauKai", serif;
+}
+
+.hero-copy h1 span {
+  display: block;
+}
+
+.hero-copy h1 span:first-child {
+  font-size: clamp(48px, 6.6vw, 108px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 0 rgb(237 243 232 / 18%);
+}
+
+.hero-copy h1 span:last-child {
+  margin-top: 13px;
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(11px, 0.98vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.hero-description {
+  display: grid;
+  gap: 4px;
+  max-width: 470px;
+  margin: 21px 0 0;
+  color: rgb(24 43 40 / 86%);
+  font-size: clamp(12px, 1vw, 15px);
+  line-height: 1.7;
+}
+
+.hero-description span:last-child {
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.foliage-layer {
+  position: absolute;
+  z-index: 5;
+  top: -13%;
+  width: min(77vw, 1100px);
+  height: 114%;
+  filter: drop-shadow(0 16px 24px rgb(11 28 24 / 28%));
+  will-change: transform;
+}
+
+.foliage-layer img {
+  object-fit: contain;
+}
+
+.foliage-left {
+  left: -13%;
+  transform-origin: 10% 45%;
+  animation: foliage-left-open 2.3s 0.36s cubic-bezier(0.2, 0.78, 0.22, 1) both;
+}
+
+.foliage-right {
+  right: -17%;
+  transform-origin: 90% 40%;
+  animation: foliage-right-open 2.35s 0.42s cubic-bezier(0.2, 0.78, 0.22, 1) both;
+}
+
+.foliage-right img {
+  transform: scaleX(-1) rotate(-8deg);
+}
+
+.opening-shade {
+  z-index: 6;
+  background: rgb(9 25 21 / 46%);
+  pointer-events: none;
+  animation: shade-open 2.3s 0.38s ease-out both;
+}
+
+.replay-button {
+  position: absolute;
+  z-index: 12;
+  right: clamp(20px, 4.5vw, 72px);
+  bottom: clamp(24px, 4vw, 52px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 0;
+  border-bottom: 1px solid rgb(24 43 40 / 34%);
+  background: transparent;
+  color: var(--night-feather);
+  padding: 8px 0 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  animation: copy-arrive 0.7s 3s ease-out forwards;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.replay-button:hover {
+  border-color: var(--night-feather);
+  transform: translateY(-2px);
+}
+
+.replay-button:focus-visible {
+  border-radius: 3px;
+  outline: 3px solid var(--eye-gold);
+  outline-offset: 5px;
+}
+
+.replay-button svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  transition: transform 220ms ease;
+}
+
+.replay-button:hover svg {
+  transform: rotate(-35deg);
+}
+
+.replay-divider {
+  width: 1px;
+  height: 11px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.species-label {
+  position: absolute;
+  z-index: 7;
+  bottom: clamp(24px, 4vw, 52px);
+  left: clamp(22px, 6vw, 96px);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin: 0;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: copy-arrive 0.7s 2.85s ease-out forwards;
+}
+
+.species-label span:first-child {
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+@keyframes foliage-left-open {
+  0% {
+    transform: translate3d(11%, 0, 0) rotate(0deg) scale(1.08);
+  }
+  18% {
+    transform: translate3d(9%, 0.5%, 0) rotate(1.2deg) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-47%, -2%, 0) rotate(-7deg) scale(0.94);
+  }
+}
+
+@keyframes foliage-right-open {
+  0% {
+    transform: translate3d(-10%, 0, 0) rotate(0deg) scale(1.09);
+  }
+  18% {
+    transform: translate3d(-8%, -0.5%, 0) rotate(-1.2deg) scale(1.09);
+  }
+  100% {
+    transform: translate3d(48%, -4%, 0) rotate(7deg) scale(0.96);
+  }
+}
+
+@keyframes shade-open {
+  0%,
+  14% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes background-arrive {
+  from {
+    filter: saturate(0.72) brightness(0.72);
+    transform: scale(1.05);
+  }
+  to {
+    filter: saturate(0.92) brightness(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes light-arrive {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mist-clear {
+  from {
+    opacity: 0.82;
+    translate: 0 12px;
+    scale: 1.18;
+  }
+  to {
+    opacity: 0.16;
+    translate: 8% -7px;
+    scale: 1;
+  }
+}
+
+@keyframes bird-arrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -39%) scale(0.96);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -43%) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bird-notices-you {
+  0%,
+  18%,
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  21% {
+    transform: rotate(1.25deg) translate3d(1px, 2px, 0);
+  }
+  25% {
+    transform: rotate(-0.45deg) translate3d(-2px, 0, 0);
+  }
+  29%,
+  68% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  70% {
+    transform: rotate(-0.8deg) translate3d(0, -2px, 0) scaleX(0.997);
+  }
+  72% {
+    transform: rotate(0.3deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes copy-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(11px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .bird-stage {
+    top: 44%;
+    left: 61%;
+    width: min(68vw, 650px);
+  }
+
+  .hero-copy {
+    width: min(54vw, 540px);
+  }
+
+  .foliage-layer {
+    width: 92vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-background img {
+    object-position: 56% center;
+  }
+
+  .site-header {
+    padding: 18px 18px;
+  }
+
+  .brand-mark {
+    width: 43px;
+    height: 29px;
+  }
+
+  .brand-mark img {
+    width: 49px;
+  }
+
+  .brand-name span:first-child {
+    font-size: 14px;
+  }
+
+  .brand-name span:last-child {
+    display: none;
+  }
+
+  .status-pill {
+    gap: 5px;
+    padding: 8px 10px;
+    font-size: 8px;
+  }
+
+  .bird-stage {
+    top: 43%;
+    left: 57%;
+    width: 88vw;
+    min-width: 340px;
+  }
+
+  .bird-shadow {
+    bottom: 3%;
+  }
+
+  .hero-copy {
+    right: 20px;
+    bottom: 84px;
+    left: 20px;
+    width: auto;
+  }
+
+  .hero-copy h1 span:first-child {
+    font-size: clamp(43px, 13vw, 62px);
+  }
+
+  .hero-description {
+    max-width: 335px;
+    margin-top: 16px;
+    line-height: 1.55;
+  }
+
+  .foliage-layer {
+    top: -5%;
+    width: 132vw;
+    height: 94%;
+  }
+
+  .foliage-left {
+    left: -37%;
+  }
+
+  .foliage-right {
+    right: -42%;
+  }
+
+  .replay-button {
+    right: 18px;
+    bottom: 23px;
+  }
+
+  .replay-button span:not(.replay-divider) {
+    display: none;
+  }
+
+  .replay-button svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .replay-divider {
+    display: none;
+  }
+
+  .species-label {
+    bottom: 23px;
+    left: 20px;
+  }
+
+  .species-label span:last-child {
+    display: none;
+  }
+}
+
+@media (max-height: 660px) and (min-width: 641px) {
+  .bird-stage {
+    top: 47%;
+    width: min(47vw, 650px);
+  }
+
+  .hero-copy {
+    bottom: 67px;
+  }
+
+  .hero-copy h1 span:first-child {
+    font-size: clamp(46px, 5.8vw, 84px);
+  }
+
+  .hero-description {
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .hero-background,
+  .hero-light,
+  .hero-mist,
+  .site-header,
+  .bird-stage,
+  .bird-idle,
+  .hero-copy,
+  .foliage-layer,
+  .opening-shade,
+  .replay-button,
+  .species-label {
+    animation: none !important;
+  }
+
+  .site-header,
+  .bird-stage,
+  .hero-copy,
+  .replay-button,
+  .species-label {
+    opacity: 1;
+  }
+
+  .hero-light {
+    opacity: 1;
+  }
+
+  .hero-mist {
+    opacity: 0.12;
+  }
+
+  .foliage-left {
+    transform: translate3d(-47%, -2%, 0) rotate(-7deg) scale(0.94);
+  }
+
+  .foliage-right {
+    transform: translate3d(48%, -4%, 0) rotate(7deg) scale(0.96);
+  }
+
+  .opening-shade {
+    opacity: 0;
+  }
 }
