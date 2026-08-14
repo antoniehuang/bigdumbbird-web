@@ -536,6 +536,13 @@ select {
   text-transform: uppercase;
 }
 
+.legal-effective-date {
+  margin: 22px 0 0;
+  color: rgb(24 43 40 / 72%);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
 .legal-placeholder {
   margin: clamp(28px, 5vw, 48px) 0 25px;
   border-left: 3px solid var(--eye-gold);
@@ -579,6 +586,66 @@ select {
   color: rgb(24 43 40 / 76%);
   font-size: 14px;
   line-height: 1.8;
+}
+
+.legal-prose {
+  border-top: 1px solid rgb(24 43 40 / 20%);
+  color: rgb(24 43 40 / 80%);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.legal-prose > p {
+  margin: 18px 0;
+}
+
+.legal-prose > p:first-child {
+  margin-top: 32px;
+}
+
+.legal-prose section {
+  border-bottom: 1px solid rgb(24 43 40 / 20%);
+  padding: clamp(30px, 5vw, 46px) 0;
+}
+
+.legal-prose h2 {
+  margin: 0 0 18px;
+  color: var(--night-feather);
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: clamp(23px, 3.2vw, 30px);
+  line-height: 1.35;
+}
+
+.legal-prose section p {
+  margin: 14px 0;
+}
+
+.legal-prose ul {
+  margin: 14px 0 18px;
+  padding-left: 1.35rem;
+}
+
+.legal-prose li {
+  margin: 7px 0;
+  padding-left: 5px;
+}
+
+.legal-prose a {
+  color: var(--banyan);
+  font-weight: 600;
+  text-decoration-color: rgb(36 79 61 / 42%);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.legal-prose a:hover {
+  color: var(--chestnut);
+  text-decoration-color: currentColor;
+}
+
+.legal-prose address {
+  margin: 14px 0;
+  font-style: normal;
 }
 
 .legal-document-footer {
