@@ -393,6 +393,227 @@ select {
   letter-spacing: 0.08em;
 }
 
+.site-footer {
+  position: absolute;
+  z-index: 12;
+  bottom: clamp(24px, 4vw, 52px);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(24 43 40 / 72%);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-50%);
+  animation: footer-arrive 0.7s 3s ease-out forwards;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+}
+
+.site-footer a:hover {
+  color: var(--night-feather);
+  text-decoration: underline;
+}
+
+.site-footer a:focus-visible,
+.legal-shell a:focus-visible {
+  border-radius: 2px;
+  outline: 3px solid var(--eye-gold);
+  outline-offset: 4px;
+}
+
+@keyframes footer-arrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.legal-shell {
+  min-height: 100svh;
+  background:
+    linear-gradient(rgb(220 235 215 / 86%), rgb(220 235 215 / 96%)),
+    url("/hero/taiwan-park-watercolor.png") center / cover fixed;
+  padding: clamp(22px, 4vw, 58px);
+}
+
+.legal-header {
+  display: flex;
+  width: min(100%, 940px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto clamp(36px, 7vw, 84px);
+}
+
+.legal-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--night-feather);
+  text-decoration: none;
+}
+
+.legal-brand img {
+  width: 54px;
+  height: auto;
+}
+
+.legal-brand span {
+  display: grid;
+}
+
+.legal-brand strong {
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+}
+
+.legal-brand small {
+  margin-top: 2px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--night-feather);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.legal-document {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  color: var(--night-feather);
+}
+
+.legal-eyebrow {
+  margin: 0 0 12px;
+  color: var(--chestnut);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.legal-document h1 {
+  display: grid;
+  margin: 0;
+}
+
+.legal-document h1 span:first-child {
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: clamp(46px, 8vw, 82px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.legal-document h1 span:last-child {
+  margin-top: 11px;
+  font-size: clamp(13px, 1.8vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.legal-placeholder {
+  margin: clamp(28px, 5vw, 48px) 0 25px;
+  border-left: 3px solid var(--eye-gold);
+  background: rgb(248 251 244 / 48%);
+  padding: 17px 20px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.legal-intro {
+  max-width: 650px;
+  margin: 0 0 42px;
+  color: rgb(24 43 40 / 78%);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.legal-sections {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgb(24 43 40 / 20%);
+}
+
+.legal-sections section {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.5fr);
+  gap: clamp(24px, 5vw, 68px);
+  border-bottom: 1px solid rgb(24 43 40 / 20%);
+  padding: 30px 0;
+}
+
+.legal-sections h2 {
+  margin: 0;
+  font-family: var(--font-display), "BiauKai", serif;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.legal-sections p {
+  margin: 0;
+  color: rgb(24 43 40 / 76%);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.legal-document-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px 0 12px;
+  color: rgb(24 43 40 / 64%);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal-document-footer p {
+  margin: 0;
+}
+
+.legal-document-footer nav {
+  display: flex;
+  gap: 18px;
+}
+
+.legal-document-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.legal-document-footer a:hover {
+  color: var(--night-feather);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 @keyframes foliage-left-open {
   0% {
     transform: translate3d(11%, 0, 0) rotate(0deg) scale(1.08);
@@ -626,6 +847,40 @@ select {
   .species-label span:last-child {
     display: none;
   }
+
+  .site-footer {
+    bottom: 23px;
+    gap: 6px;
+    font-size: 7px;
+    letter-spacing: 0.04em;
+  }
+
+  .legal-shell {
+    padding: 20px;
+  }
+
+  .legal-header {
+    margin-bottom: 52px;
+  }
+
+  .legal-brand small {
+    display: none;
+  }
+
+  .legal-back {
+    font-size: 9px;
+  }
+
+  .legal-sections section {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 24px 0;
+  }
+
+  .legal-document-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (max-height: 660px) and (min-width: 641px) {
@@ -674,6 +929,12 @@ select {
   .replay-button,
   .species-label {
     opacity: 1;
+  }
+
+  .site-footer {
+    animation: none !important;
+    opacity: 1;
+    transform: translateX(-50%);
   }
 
   .hero-light {

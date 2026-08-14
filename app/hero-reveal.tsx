@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 export function HeroReveal() {
@@ -95,6 +96,12 @@ export function HeroReveal() {
         <span lang="zh-Hant">黑冠麻鷺</span>
         <span>Malayan Night-Heron</span>
       </p>
+
+      <footer className="site-footer" aria-label="Legal">
+        <Link href="/privacy">Privacy Policy</Link>
+        <span aria-hidden="true">·</span>
+        <Link href="/terms">Terms of Service</Link>
+      </footer>
     </main>
   );
 }
